@@ -1,1 +1,108 @@
+def __getattr__(name):
+    if name == "LED":
+        from .wrappers.generic import LED
+        return LED
+    if name in ("Button", "Switch", "TouchSensor", "MotionSensor", "Touch", "Motion"):
+        from .wrappers.generic import ButtonLike
+        return ButtonLike
+    if name in ("ADC", "LightSensor", "Potentiometer", "Pot", "Light"):
+        from .wrappers.generic import ADC
+        return ADC
+    if name in ("Climate", "ClimateSensor"):
+        from .wrappers.i2c import ClimateSensor
+        return ClimateSensor
+    if name in ("Color", "ColorSensor"):
+        from .wrappers.i2c import ColorSensor
+        return ColorSensor
+    if name in ("Distance", "DistanceSensor"):
+        from .wrappers.i2c import DistanceSensor
+        return DistanceSensor
+    if name in ("GyroAccel", "GyroAxel"):
+        from .wrappers.i2c import GyroAccel
+        return GyroAccel
+    if name == "OLED":
+        from .wrappers.i2c import OLED
+        return OLED
+    if name == "Buzzer":
+        from .wrappers.modules import Buzzer
+        return Buzzer
+    if name == "PWM":
+        from .wrappers.modules import PWM
+        return PWM
+    if name == "Joystick":
+        from .wrappers.modules import Joystick
+        return Joystick
+    if name == "Encoder":
+        from .wrappers.modules import Encoder
+        return Encoder
+    if name in ("SoundSensor", "Sound"):
+        from .wrappers.modules import SoundSensor
+        return SoundSensor
+    if name == "LEDTower":
+        from .wrappers.modules import LEDTower
+        return LEDTower
+    if name == "Servo":
+        from .modules.Servo import Servo
+        return Servo
+    if name == "WiFi":
+        from .iot.WiFi import WiFi
+        return WiFi
+    if name == "TelegramBot":
+        from .iot.telegram_bot import TelegramBot
+        return TelegramBot
+    if name == "display":
+        from .Display import display
+        return display
+    if name == "demo":
+        from .Demo import demo
+        return demo
+    
+    
+    raise AttributeError(f"module {__name__} has no attribute {name}")
+
+
+# Fake import detection
+# Ignore this part of code, it's just to help IDEs with autocompletion
+try: 
+    _ = 1/0
+except:
+    FAKE_IMPORT = False
+
+if FAKE_IMPORT:
+    from .wrappers.generic import LED, ButtonLike, ADC
+    from .wrappers.i2c import ClimateSensor, ColorSensor, DistanceSensor, GyroAccel, OLED
+    from .wrappers.modules import Buzzer, PWM, Joystick, Encoder, SoundSensor, LEDTower
+    
+    from .modules.Servo import Servo
+
+    from .iot.WiFi import WiFi
+    from .iot.telegram_bot import TelegramBot
+
+    from .Display import display
+    from .Demo import demo
+
+    # Button Likes
+    Button = ButtonLike
+    Switch = ButtonLike
+    TouchSensor = ButtonLike
+    MotionSensor = ButtonLike
+
+    # Analog Likes
+    LightSensor = ADC
+    Potentiometer = ADC
+
+    # Sensors
+    Climate = ClimateSensor
+    Color = ColorSensor
+    Distance = DistanceSensor
+    Touch = TouchSensor
+    Motion = MotionSensor
+    Light = LightSensor
+    Pot = Potentiometer
+    Sound = SoundSensor
+
+    #Other
+    GyroAxel = GyroAccel
+
+
 
